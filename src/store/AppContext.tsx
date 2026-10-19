@@ -8,6 +8,7 @@ import {
   saveCredentials,
 } from './persistence'
 import { initialState, reducer } from './reducer'
+import { useTabSync } from './tabSync'
 import type { AppState } from './types'
 
 const SAVE_DELAY_MS = 300
@@ -55,7 +56,8 @@ function usePersistence(state: AppState) {
 }
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, undefined, restoreSession)
+  const [state, localDispatch] = useReducer(reducer, undefined, restoreSession)
+  const dispatch = useTabSync(state.credentials?.idInstance, localDispatch)
   usePersistence(state)
 
   return (

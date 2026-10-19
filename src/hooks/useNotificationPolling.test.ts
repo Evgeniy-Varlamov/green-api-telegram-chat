@@ -110,6 +110,31 @@ describe('runPolling', () => {
     expect(receive).toHaveBeenCalled()
   })
 
+  it('событие offline прерывает висящий запрос и сразу показывает «Нет сети»', async () => {
+    const onLine = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(true)
+    receive.mockImplementationOnce(
+      (_credentials, requestSignal) =>
+        new Promise((_resolve, reject) =>
+          requestSignal?.addEventListener('abort', () => reject(new ApiError('aborted', 0, ''))),
+        ),
+    )
+    stopAfter()
+    const done = runPolling(credentials, dispatch, controller.signal)
+    await Promise.resolve()
+
+    onLine.mockReturnValue(false)
+    window.dispatchEvent(new Event('offline'))
+    await vi.waitFor(() =>
+      expect(dispatch).toHaveBeenCalledWith({ type: 'CONNECTION_CHANGED', connection: 'offline' }),
+    )
+    expect(dispatch).not.toHaveBeenCalledWith({ type: 'CONNECTION_CHANGED', connection: 'error' })
+
+    onLine.mockReturnValue(true)
+    window.dispatchEvent(new Event('online'))
+    await done
+    expect(receive).toHaveBeenCalledTimes(2)
+  })
+
   it('отмена прерывает цикл без ошибки', async () => {
     receive.mockImplementation(async () => {
       controller.abort()

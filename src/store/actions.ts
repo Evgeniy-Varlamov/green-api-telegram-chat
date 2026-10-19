@@ -5,7 +5,15 @@ import type { ChatData, Connection, Message, MessageStatus } from './types'
 export type Action =
   | { type: 'LOGIN'; credentials: Credentials; data?: ChatData }
   | { type: 'LOGOUT' }
-  | { type: 'CHAT_CREATED'; chatId: string; phone?: string; username?: string; now: number }
+  | {
+      type: 'CHAT_CREATED'
+      chatId: string
+      phone?: string
+      username?: string
+      now: number
+      /** Пришло из другой вкладки: чат добавляется, но не открывается */
+      remote?: boolean
+    }
   | { type: 'CHAT_OPENED'; chatId: string }
   | { type: 'CHAT_CLOSED' }
   | { type: 'MESSAGE_SEND_STARTED'; message: Message }

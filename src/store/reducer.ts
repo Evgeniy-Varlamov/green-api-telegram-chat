@@ -85,12 +85,16 @@ export function reducer(state: AppState, action: Action): AppState {
         ...next,
         chats: {
           ...next.chats,
-          [action.chatId]: { ...chat, username: chat.username ?? action.username, unread: 0 },
+          [action.chatId]: {
+            ...chat,
+            username: chat.username ?? action.username,
+            unread: action.remote ? chat.unread : 0,
+          },
         },
         messages: next.messages[action.chatId]
           ? next.messages
           : { ...next.messages, [action.chatId]: [] },
-        activeChatId: action.chatId,
+        activeChatId: action.remote ? state.activeChatId : action.chatId,
       }
     }
 
