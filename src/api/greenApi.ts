@@ -75,3 +75,11 @@ export function deleteNotification(
     signal,
   })
 }
+
+/** Отмечает сообщения чата прочитанными — у собеседника появляются две галочки. */
+export function readChat(credentials: Credentials, chatId: string) {
+  return request<{ setRead: boolean }>(credentials, 'readChat', {
+    httpMethod: 'POST',
+    body: { chatId },
+  })
+}

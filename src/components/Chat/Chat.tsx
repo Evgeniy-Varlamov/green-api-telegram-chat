@@ -1,4 +1,5 @@
 import { useChatActions } from '../../hooks/useChatActions'
+import { useMarkRead } from '../../hooks/useMarkRead'
 import { useAppDispatch, useAppState } from '../../store/hooks'
 import { selectActiveChat, selectActiveMessages } from '../../store/selectors'
 import styles from './Chat.module.css'
@@ -33,6 +34,7 @@ export function Chat() {
   const { sendText, retry } = useChatActions()
   const chat = selectActiveChat(state)
   const messages = selectActiveMessages(state)
+  useMarkRead(chat?.chatId ?? null, messages)
 
   return (
     <div className={`${styles.layout} ${chat ? styles.chatOpen : ''}`}>

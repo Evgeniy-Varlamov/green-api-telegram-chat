@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../../App'
 import type { NotificationBody } from '../../api/types'
@@ -21,6 +21,7 @@ function fakeApi() {
   let waiter: (() => void) | null = null
   let receipt = 0
   const sent: { chatId: string; message: string }[] = []
+  const reads: string[] = []
 
   const fetchMock = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
     const method = /\/waInstance\d+\/(\w+)\//.exec(String(input))?.[1]
@@ -35,6 +36,9 @@ function fakeApi() {
         sent.push(JSON.parse(String(init?.body)))
         return json({ idMessage: `srv-${sent.length}` })
       }
+      case 'readChat':
+        reads.push(JSON.parse(String(init?.body)).chatId)
+        return json({ setRead: true })
       case 'deleteNotification':
         return json({ result: true })
       case 'receiveNotification': {
@@ -56,6 +60,7 @@ function fakeApi() {
 
   return {
     sent,
+    reads,
     push(body: NotificationBody) {
       queue.push({ receiptId: ++receipt, body })
       waiter?.()
@@ -119,6 +124,9 @@ describe('Chat: сквозной сценарий ТЗ', () => {
       },
     })
     expect(await within(log).findByText('И тебе привет')).toBeInTheDocument()
+
+    // Открытый чат отмечается прочитанным — у собеседника две галочки
+    await waitFor(() => expect(api.reads).toEqual(['555']))
   })
 
   it('ответ из другого чата увеличивает счётчик непрочитанных', async () => {
@@ -137,6 +145,11 @@ describe('Chat: сквозной сценарий ТЗ', () => {
     expect(await screen.findByText('Мария')).toBeInTheDocument()
     expect(screen.getByLabelText('Непрочитанных: 1')).toBeInTheDocument()
     expect(screen.getByText('Ты тут?')).toBeInTheDocument()
+    // Чат не открыт — прочитанным не отмечается
+    expect(api.reads).toEqual([])
+
+    await userEvent.setup().click(screen.getByText('Мария'))
+    await waitFor(() => expect(api.reads).toEqual(['777']))
   })
 
   it('ошибка отправки → «Повторить»', async () => {
