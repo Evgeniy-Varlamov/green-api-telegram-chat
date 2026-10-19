@@ -1,0 +1,23 @@
+# Dependencies & build
+node_modules
+dist
+dist-ssr
+coverage
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env (токены GREEN-API не коммитятся)
+.env*
+!.env.example
+*.local
+
+# Local planning docs
+CONTRACT.md
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
