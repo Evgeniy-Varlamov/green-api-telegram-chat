@@ -5,6 +5,19 @@ import { formatDay, isSameDay } from '../../../utils/time'
 import { MessageBubble } from './MessageBubble'
 import styles from './MessageList.module.css'
 
+const STACK_WINDOW_MS = 5 * 60 * 1000
+
+/** Сообщения одного направления с разницей до 5 минут в один день образуют группу */
+function sameGroup(a: Message | undefined, b: Message | undefined): boolean {
+  return (
+    !!a &&
+    !!b &&
+    a.direction === b.direction &&
+    isSameDay(a.timestamp, b.timestamp) &&
+    Math.abs(b.timestamp - a.timestamp) < STACK_WINDOW_MS
+  )
+}
+
 interface MessageListProps {
   chatId: string
   messages: Message[]
@@ -37,7 +50,12 @@ export function MessageList({ chatId, messages, onRetry }: MessageListProps) {
                     <span>{formatDay(message.timestamp)}</span>
                   </div>
                 )}
-                <MessageBubble message={message} onRetry={onRetry} />
+                <MessageBubble
+                  message={message}
+                  onRetry={onRetry}
+                  stackTop={!newDay && sameGroup(prev, message)}
+                  stackBottom={sameGroup(message, messages[index + 1])}
+                />
               </Fragment>
             )
           })}

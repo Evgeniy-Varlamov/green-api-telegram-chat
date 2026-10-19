@@ -15,17 +15,17 @@
 
 .banner {
   padding: 10px 16px;
-  background: #fff4e5;
-  color: #8a4b00;
+  background: var(--warning-bg);
+  color: var(--warning-text);
   font-size: 14px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--divider);
 }
 
 .placeholder {
   flex: 1;
   display: grid;
   place-items: center;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
 }
 
 /* На узком экране — одна панель: список или открытый чат */

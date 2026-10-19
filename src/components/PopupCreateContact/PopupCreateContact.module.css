@@ -5,7 +5,7 @@
   display: grid;
   place-items: center;
   padding: 16px;
-  background: rgb(0 0 0 / 0.35);
+  background: var(--overlay);
 }
 
 .dialog {
@@ -14,7 +14,7 @@
   padding: 20px 24px 24px;
   background: var(--bg-sidebar);
   border-radius: 20px;
-  box-shadow: 0 16px 48px rgb(0 0 0 / 0.18);
+  box-shadow: var(--shadow-float);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -46,7 +46,7 @@
 }
 
 .close:hover {
-  background: var(--bg-app);
+  background: var(--hover);
 }
 
 .close:focus-visible {
@@ -62,11 +62,11 @@
 .phone {
   --react-international-phone-height: 44px;
   --react-international-phone-border-radius: var(--radius-control);
-  --react-international-phone-border-color: var(--border);
-  --react-international-phone-background-color: var(--bg-app);
-  --react-international-phone-country-selector-background-color: var(--bg-app);
-  --react-international-phone-country-selector-background-color-hover: var(--border);
-  --react-international-phone-font-size: 15px;
+  --react-international-phone-border-color: var(--divider);
+  --react-international-phone-background-color: var(--bg-sidebar);
+  --react-international-phone-country-selector-background-color: var(--bg-sidebar);
+  --react-international-phone-country-selector-background-color-hover: var(--hover);
+  --react-international-phone-font-size: 16px;
   --react-international-phone-text-color: var(--text);
   --react-international-phone-dropdown-item-background-color: var(--bg-sidebar);
 }
@@ -97,6 +97,10 @@
   color: var(--accent-contrast);
   font-weight: 600;
   cursor: pointer;
+}
+
+.submit:not(:disabled):hover {
+  background: var(--accent-hover);
 }
 
 .submit:disabled {

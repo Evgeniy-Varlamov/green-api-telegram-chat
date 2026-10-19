@@ -15,8 +15,9 @@ body,
 
 body {
   font-family: var(--font);
-  font-size: 15px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.15px;
   color: var(--text);
   background: var(--bg-app);
   -webkit-font-smoothing: antialiased;

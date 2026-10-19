@@ -27,7 +27,8 @@ function StatusIcon({ status }: { status: MessageStatus }) {
       </svg>
     )
   }
-  const double = status === 'delivered' || status === 'read'
+  // Как в MAX и Telegram: одна галочка — отправлено/доставлено, две — прочитано
+  const double = status === 'read'
   return (
     <svg
       width={double ? 18 : 14}
@@ -59,14 +60,29 @@ function StatusIcon({ status }: { status: MessageStatus }) {
 interface MessageBubbleProps {
   message: Message
   onRetry: (message: Message) => void
+  /** Предыдущее сообщение из той же группы — уголок сверху меньше */
+  stackTop?: boolean
+  /** Следующее сообщение из той же группы — уголок снизу меньше */
+  stackBottom?: boolean
 }
 
-export function MessageBubble({ message, onRetry }: MessageBubbleProps) {
+export function MessageBubble({ message, onRetry, stackTop, stackBottom }: MessageBubbleProps) {
   const out = message.direction === 'out'
   const { status } = message
   return (
-    <div className={`${styles.row} ${out ? styles.rowOut : ''}`}>
-      <div className={`${styles.bubble} ${out ? styles.bubbleOut : styles.bubbleIn}`}>
+    <div
+      className={`${styles.row} ${out ? styles.rowOut : ''} ${stackTop ? styles.rowStacked : ''}`}
+    >
+      <div
+        className={[
+          styles.bubble,
+          out ? styles.bubbleOut : styles.bubbleIn,
+          stackTop && styles.stackTop,
+          stackBottom && styles.stackBottom,
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
         {message.unsupported ? (
           <span className={styles.unsupported}>Неподдерживаемый тип сообщения</span>
         ) : (

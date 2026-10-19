@@ -3,6 +3,7 @@
   min-height: 0;
   overflow-y: auto;
   padding: 12px 16px;
+  background: var(--bg-chat);
 }
 
 .inner {
@@ -10,55 +11,81 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
 .empty {
   height: 100%;
   display: grid;
   place-items: center;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
 }
 
 .day {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   justify-content: center;
   margin: 12px 0 8px;
 }
 
 .day span {
-  padding: 4px 10px;
+  padding: 2px 10px;
   border-radius: 12px;
-  background: rgb(0 0 0 / 0.06);
+  background: var(--separator-bg);
   color: var(--text-secondary);
   font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
 }
 
 .row {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 8px;
 }
 
 .rowOut {
   align-items: flex-end;
 }
 
+/* Сообщения одного отправителя подряд идут плотнее */
+.rowStacked {
+  margin-top: 2px;
+}
+
 .bubble {
-  max-width: min(75%, 520px);
-  padding: 8px 12px 6px;
+  max-width: min(75%, 480px);
+  min-width: 72px;
+  padding: 6px 12px 6px;
   border-radius: var(--radius-bubble);
-  box-shadow: 0 1px 1px rgb(0 0 0 / 0.04);
 }
 
 .bubbleIn {
   background: var(--bubble-in);
-  border-bottom-left-radius: 6px;
+  color: var(--bubble-in-text);
 }
 
 .bubbleOut {
   background: var(--bubble-out);
-  border-bottom-right-radius: 6px;
+  color: var(--bubble-out-text);
+}
+
+.bubbleIn.stackTop {
+  border-top-left-radius: var(--radius-bubble-stack);
+}
+
+.bubbleIn.stackBottom {
+  border-bottom-left-radius: var(--radius-bubble-stack);
+}
+
+.bubbleOut.stackTop {
+  border-top-right-radius: var(--radius-bubble-stack);
+}
+
+.bubbleOut.stackBottom {
+  border-bottom-right-radius: var(--radius-bubble-stack);
 }
 
 .text {
@@ -67,30 +94,38 @@
 }
 
 .unsupported {
-  color: var(--text-secondary);
   font-style: italic;
+  opacity: 0.7;
 }
 
 .meta {
   float: right;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  margin: 6px 0 0 12px;
-  color: var(--text-secondary);
+  gap: 3px;
+  margin: 6px 0 -2px 10px;
   font-size: 12px;
-  line-height: 1;
+  line-height: 16px;
+  letter-spacing: 0.3px;
+}
+
+.bubbleIn .meta {
+  color: var(--bubble-in-meta);
+}
+
+.bubbleOut .meta {
+  color: var(--bubble-out-meta);
 }
 
 .status {
   display: inline-flex;
 }
 
-.status_read {
-  color: var(--accent);
+.bubbleOut .status {
+  color: #ffffffe0;
 }
 
-.status_failed {
+.bubbleOut .status_failed {
   color: var(--danger);
 }
 

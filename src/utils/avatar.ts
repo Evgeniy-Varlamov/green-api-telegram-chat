@@ -1,4 +1,11 @@
-const COLORS = ['#e17076', '#7bc862', '#65aadd', '#a695e7', '#ee7aae', '#6ec9cb', '#faa774']
+// Градиенты аватаров из дизайн-системы MAX: coral, orange, green, sky, violet
+const COLORS = [
+  ['#ff48b6', '#ff8a35'],
+  ['#ffc93d', '#ff832a'],
+  ['#14e1d5', '#03c722'],
+  ['#08d7f3', '#5398ff'],
+  ['#bf97ff', '#526eff'],
+].map(([from, to]) => `linear-gradient(135deg, ${from}, ${to})`)
 
 export function initials(title: string): string {
   const words = title
@@ -14,7 +21,7 @@ export function initials(title: string): string {
     .join('')
 }
 
-export function avatarColor(key: string): string {
+export function avatarBackground(key: string): string {
   let hash = 0
   for (const char of key) hash = (hash * 31 + char.charCodeAt(0)) | 0
   return COLORS[Math.abs(hash) % COLORS.length]

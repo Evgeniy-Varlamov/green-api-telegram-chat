@@ -4,11 +4,11 @@
   display: flex;
   flex-direction: column;
   background: var(--bg-sidebar);
-  border-right: 1px solid var(--border);
+  border-right: 1px solid var(--divider);
 }
 
 .header {
-  height: 56px;
+  height: 60px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -18,8 +18,10 @@
 
 .title {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 24px;
   font-weight: 600;
+  letter-spacing: 0;
   flex: 1;
 }
 
@@ -36,8 +38,8 @@
 }
 
 .iconButton:hover {
-  background: var(--bg-app);
-  color: var(--accent);
+  background: var(--hover);
+  color: var(--text);
 }
 
 .iconButton:focus-visible {
@@ -55,8 +57,9 @@
   z-index: 10;
   padding: 6px;
   background: var(--bg-sidebar);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-float);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
 }
@@ -73,7 +76,7 @@
 
 .dropdown button:hover,
 .dropdown button:focus-visible {
-  background: var(--bg-app);
+  background: var(--hover);
   outline: none;
 }
 
@@ -83,7 +86,7 @@
 
 .connection {
   padding: 6px 16px;
-  background: var(--bg-app);
+  background: var(--hover);
   color: var(--text-secondary);
   font-size: 13px;
   text-align: center;
@@ -95,16 +98,21 @@
 
 .searchInput {
   width: 100%;
-  height: 36px;
-  padding: 0 12px;
-  border: 0;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid transparent;
   border-radius: var(--radius-control);
-  background: var(--bg-app);
+  background: var(--input-bg);
   outline: none;
 }
 
+.searchInput::placeholder {
+  color: var(--text-tertiary);
+}
+
 .searchInput:focus {
-  box-shadow: 0 0 0 2px var(--accent);
+  border-color: var(--accent);
+  background: var(--bg-sidebar);
 }
 
 .list {
@@ -122,14 +130,14 @@
   gap: 12px;
   padding: 8px 10px;
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--radius-cell);
   background: transparent;
   text-align: left;
   cursor: pointer;
 }
 
 .item:hover {
-  background: var(--bg-app);
+  background: var(--hover);
 }
 
 .item:focus-visible {
@@ -162,13 +170,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .itemTime {
   flex-shrink: 0;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   font-size: 12px;
+  letter-spacing: 0.3px;
 }
 
 .itemPreview {
@@ -178,7 +187,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .badge {
