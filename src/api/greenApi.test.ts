@@ -148,6 +148,22 @@ describe('ошибки', () => {
     await expect(getStateInstance(credentials)).rejects.toMatchObject({ kind: 'network' })
   })
 
+  it('таймаут, если сервер не отвечает (неверный idInstance)', async () => {
+    vi.useFakeTimers()
+    fetchMock.mockImplementationOnce(
+      (_url, init) =>
+        new Promise((_resolve, reject) => {
+          init?.signal?.addEventListener('abort', () =>
+            reject(new DOMException('aborted', 'AbortError')),
+          )
+        }),
+    )
+    const promise = getStateInstance(credentials).catch((e: unknown) => e)
+    await vi.advanceTimersByTimeAsync(15_000)
+    expect(await promise).toMatchObject({ kind: 'timeout' })
+    vi.useRealTimers()
+  })
+
   it('отмена запроса', async () => {
     fetchMock.mockRejectedValueOnce(new DOMException('aborted', 'AbortError'))
     await expect(getStateInstance(credentials)).rejects.toMatchObject({ kind: 'aborted' })

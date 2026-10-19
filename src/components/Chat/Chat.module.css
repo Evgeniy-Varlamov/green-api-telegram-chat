@@ -1,0 +1,38 @@
+.layout {
+  height: 100%;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  background: var(--bg-app);
+}
+
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-chat);
+}
+
+.banner {
+  padding: 10px 16px;
+  background: #fff4e5;
+  color: #8a4b00;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.placeholder {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 767px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .main {
+    display: none;
+  }
+}

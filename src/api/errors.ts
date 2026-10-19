@@ -1,5 +1,6 @@
 export type ApiErrorKind =
   | 'network'
+  | 'timeout'
   | 'unauthorized'
   | 'suspended'
   | 'validation'
@@ -42,6 +43,7 @@ export function classifyHttpError(status: number, body: string): ApiErrorKind {
 
 const MESSAGES: Record<ApiErrorKind, string> = {
   network: 'Нет соединения с GREEN-API. Проверьте интернет.',
+  timeout: 'Сервер не ответил. Проверьте idInstance и адрес API.',
   unauthorized: 'Неверный idInstance или apiTokenInstance.',
   suspended: 'Аккаунт временно ограничен, отправка невозможна.',
   validation: 'Сервер отклонил запрос: проверьте введённые данные.',

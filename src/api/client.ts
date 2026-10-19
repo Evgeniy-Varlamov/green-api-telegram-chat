@@ -2,6 +2,7 @@ import { ApiError, classifyHttpError } from './errors'
 import type { Credentials } from './types'
 
 export const DEFAULT_API_URL = 'https://api.green-api.com'
+export const DEFAULT_TIMEOUT_MS = 15_000
 
 interface RequestOptions {
   httpMethod?: 'GET' | 'POST' | 'DELETE'
@@ -9,6 +10,7 @@ interface RequestOptions {
   pathSuffix?: string
   query?: Record<string, string | number>
   signal?: AbortSignal
+  timeoutMs?: number
 }
 
 export function buildUrl(
@@ -30,24 +32,41 @@ export async function request<T>(
   method: string,
   options: RequestOptions = {},
 ): Promise<T> {
-  const { httpMethod = 'GET', body, signal } = options
+  const { httpMethod = 'GET', body, signal, timeoutMs = DEFAULT_TIMEOUT_MS } = options
+
+  // При неверном idInstance сервер не отвечает вовсе — без таймаута запрос висит бесконечно
+  const controller = new AbortController()
+  let timedOut = false
+  const timer = setTimeout(() => {
+    timedOut = true
+    controller.abort()
+  }, timeoutMs)
+  const abortFromOutside = () => controller.abort()
+  if (signal?.aborted) controller.abort()
+  signal?.addEventListener('abort', abortFromOutside)
+
   let response: Response
+  let text: string
   try {
     response = await fetch(buildUrl(credentials, method, options), {
       method: httpMethod,
       // Единственный заголовок, который разрешает CORS-preflight GREEN-API
       headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
       body: body === undefined ? undefined : JSON.stringify(body),
-      signal,
+      signal: controller.signal,
     })
+    text = await response.text()
   } catch (error) {
+    if (timedOut) throw new ApiError('timeout', 0, 'timeout')
     if (error instanceof DOMException && error.name === 'AbortError') {
       throw new ApiError('aborted', 0, 'aborted')
     }
     throw new ApiError('network', 0, error instanceof Error ? error.message : 'network error')
+  } finally {
+    clearTimeout(timer)
+    signal?.removeEventListener('abort', abortFromOutside)
   }
 
-  const text = await response.text()
   if (!response.ok) {
     throw new ApiError(classifyHttpError(response.status, text), response.status, text)
   }

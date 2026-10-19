@@ -60,6 +60,7 @@ export function receiveNotification(credentials: Credentials, signal?: AbortSign
   return request<ReceivedNotification | null>(credentials, 'receiveNotification', {
     query: { receiveTimeout: RECEIVE_TIMEOUT_SECONDS },
     signal,
+    timeoutMs: (RECEIVE_TIMEOUT_SECONDS + 10) * 1000,
   })
 }
 
