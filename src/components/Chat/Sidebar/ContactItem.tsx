@@ -1,5 +1,6 @@
 import type { ChatListItem } from '../../../store/selectors'
 import { formatListTime } from '../../../utils/time'
+import { avatarLetters } from '../../../utils/avatar'
 import { Avatar } from '../../Avatar/Avatar'
 import styles from './Sidebar.module.css'
 
@@ -25,7 +26,7 @@ export function ContactItem({ item, active, onSelect }: ContactItemProps) {
         aria-current={active ? 'true' : undefined}
         onClick={() => onSelect(chat.chatId)}
       >
-        <Avatar title={title} colorKey={chat.chatId} />
+        <Avatar letters={avatarLetters(chat)} colorKey={chat.chatId} />
         <span className={styles.itemBody}>
           <span className={styles.itemRow}>
             <span className={styles.itemName}>{title}</span>
