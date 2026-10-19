@@ -22,3 +22,9 @@ export function formatPhone(digits: string): string {
   if (ru) return `+7 ${ru[1]} ${ru[2]}-${ru[3]}-${ru[4]}`
   return `+${digits}`
 }
+
+/** Номер из поля ввода заполнен полностью по маске выбранной страны. */
+export function isPhoneComplete(digits: string, dialCode: string, mask: string): boolean {
+  const required = dialCode.length + (mask.match(/\./g)?.length ?? 0)
+  return isValidPhone(digits) && digits.length >= required
+}

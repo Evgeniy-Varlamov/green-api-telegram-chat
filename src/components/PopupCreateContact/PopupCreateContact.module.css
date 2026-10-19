@@ -1,0 +1,110 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(0 0 0 / 0.35);
+}
+
+.dialog {
+  width: 100%;
+  max-width: 380px;
+  padding: 20px 24px 24px;
+  background: var(--bg-sidebar);
+  border-radius: 20px;
+  box-shadow: 0 16px 48px rgb(0 0 0 / 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close {
+  width: 36px;
+  height: 36px;
+  margin-right: -8px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--bg-app);
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+.hint {
+  margin: -8px 0 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.phone {
+  --react-international-phone-height: 44px;
+  --react-international-phone-border-radius: var(--radius-control);
+  --react-international-phone-border-color: var(--border);
+  --react-international-phone-background-color: var(--bg-app);
+  --react-international-phone-country-selector-background-color: var(--bg-app);
+  --react-international-phone-country-selector-background-color-hover: var(--border);
+  --react-international-phone-font-size: 15px;
+  --react-international-phone-text-color: var(--text);
+  --react-international-phone-dropdown-item-background-color: var(--bg-sidebar);
+}
+
+.phone :global(.react-international-phone-input) {
+  flex: 1;
+}
+
+.phoneInput:focus {
+  border-color: var(--accent) !important;
+  outline: none;
+}
+
+.error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-control);
+  background: rgb(229 72 77 / 0.08);
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.submit {
+  height: 44px;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.submit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

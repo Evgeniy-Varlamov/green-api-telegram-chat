@@ -1,11 +1,13 @@
 import { Chat } from './components/Chat/Chat'
 import { FormVerify } from './components/FormVerify/FormVerify'
+import { useNotificationPolling } from './hooks/useNotificationPolling'
 import { useSession, useSessionCheck } from './hooks/useSession'
 import { AppProvider } from './store/AppContext'
 
 function Screens() {
   const { credentials, login } = useSession()
   useSessionCheck()
+  useNotificationPolling()
   return credentials ? <Chat /> : <FormVerify onSubmit={login} />
 }
 

@@ -9,6 +9,7 @@ export type ApiErrorKind =
   | 'quota'
   | 'notAuthorizedInstance'
   | 'webhookConfigured'
+  | 'accountNotFound'
   | 'server'
   | 'aborted'
   | 'unknown'
@@ -53,6 +54,8 @@ const MESSAGES: Record<ApiErrorKind, string> = {
   notAuthorizedInstance: 'Инстанс не авторизован в мессенджере. Авторизуйте его в личном кабинете.',
   webhookConfigured:
     'В настройках инстанса задан Webhook URL — очистите его в личном кабинете и подождите минуту.',
+  accountNotFound:
+    'Аккаунт Telegram с этим номером не найден. Возможно, номер скрыт настройками приватности получателя.',
   server: 'Сервис временно недоступен. Повторите позже.',
   aborted: 'Запрос отменён.',
   unknown: 'Неизвестная ошибка.',
