@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  // Относительные пути: сборка работает по любому адресу, в том числе username.github.io/<repo>/
+  base: './',
   plugins: [react()],
   test: {
     environment: 'jsdom',
