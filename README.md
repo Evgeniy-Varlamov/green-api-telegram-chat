@@ -2,7 +2,7 @@
 
 Веб-интерфейс для отправки и получения текстовых сообщений в мессенджере через [GREEN-API](https://green-api.com). Тестовое задание на должность «Фронтенд разработчик React».
 
-**Демо:** _ссылка появится после публикации_
+**Демо:** https://evgeniy-varlamov.github.io/green-api-telegram-chat/ — для входа нужны `idInstance` и `apiTokenInstance` вашего инстанса GREEN-API для Telegram.
 
 ![Переписка](docs/screenshots/02-chat-desktop.png)
 
