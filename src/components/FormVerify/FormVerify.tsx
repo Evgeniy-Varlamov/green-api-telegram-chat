@@ -2,6 +2,7 @@ import { useId, useState, type FormEvent } from 'react'
 import { DEFAULT_API_URL } from '../../api/client'
 import { errorMessage } from '../../api/errors'
 import type { Credentials } from '../../api/types'
+import { ThemeToggleButton } from '../ThemeSwitcher/ThemeSwitcher'
 import styles from './FormVerify.module.css'
 
 interface FormVerifyProps {
@@ -48,6 +49,7 @@ export function FormVerify({ onSubmit }: FormVerifyProps) {
 
   return (
     <div className={styles.screen}>
+      <ThemeToggleButton className={styles.themeToggle} />
       <form className={styles.card} onSubmit={handleSubmit} noValidate>
         <h1 className={styles.title}>Вход</h1>
         <p className={styles.subtitle}>

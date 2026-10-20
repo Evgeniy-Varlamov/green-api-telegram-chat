@@ -69,6 +69,18 @@
   --react-international-phone-font-size: 16px;
   --react-international-phone-text-color: var(--text);
   --react-international-phone-dropdown-item-background-color: var(--bg-sidebar);
+  --react-international-phone-dropdown-item-text-color: var(--text);
+  --react-international-phone-dropdown-item-dial-code-color: var(--text-tertiary);
+  --react-international-phone-selected-dropdown-item-background-color: var(--accent-soft);
+  --react-international-phone-selected-dropdown-item-text-color: var(--text);
+  --react-international-phone-selected-dropdown-item-dial-code-color: var(--text-tertiary);
+  --react-international-phone-dropdown-preferred-list-divider-color: var(--divider);
+  --react-international-phone-dropdown-shadow: var(--shadow-float);
+  --react-international-phone-country-selector-border-color: var(--divider);
+  --react-international-phone-country-selector-arrow-color: var(--text-tertiary);
+  --react-international-phone-disabled-background-color: var(--input-bg);
+  --react-international-phone-disabled-text-color: var(--text-tertiary);
+  --react-international-phone-disabled-country-selector-background-color: var(--input-bg);
 }
 
 .phone :global(.react-international-phone-input) {
@@ -84,7 +96,7 @@
   margin: 0;
   padding: 10px 12px;
   border-radius: var(--radius-control);
-  background: rgb(229 72 77 / 0.08);
+  background: var(--danger-soft);
   color: var(--danger);
   font-size: 14px;
 }

@@ -21,7 +21,7 @@
   padding: 10px 14px;
   border: 1px solid var(--divider);
   border-radius: var(--radius-control);
-  background: var(--bg-sidebar);
+  background: var(--bg-writebar-input);
   resize: none;
   outline: none;
   line-height: 22px;

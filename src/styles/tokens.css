@@ -1,41 +1,58 @@
 /*
- * Значения взяты из дизайн-системы web.max.ru (тема «simple», светлая схема).
+ * Значения взяты из дизайн-системы web.max.ru (тема «simple»): light-dark(светлая, тёмная).
+ * Тему выбирает атрибут data-theme на <html>; без атрибута — по настройке системы.
  */
 :root {
+  color-scheme: light dark;
+
   /* Поверхности */
-  --bg-app: #edeef2;
-  --bg-sidebar: #ffffff;
-  --bg-chat: #ffffff;
-  --input-bg: #09090914;
-  --hover: #f6f6f6;
-  --overlay: #0c0d0e52;
+  --bg-app: light-dark(#edeef2, #0f0f12);
+  --bg-sidebar: light-dark(#ffffff, #17181c);
+  --bg-chat: light-dark(#ffffff, #0e0e11);
+  --bg-writebar-input: light-dark(#ffffff, #1e1f24);
+  --input-bg: light-dark(#09090914, #ffffff17);
+  --hover: light-dark(#f6f6f6, #32343d);
+  --overlay: light-dark(#0c0d0e52, #0d0d0da3);
 
   /* Текст */
-  --text: #060708;
-  --text-secondary: #060708ad;
-  --text-tertiary: #06070885;
+  --text: light-dark(#060708, #ffffff);
+  --text-secondary: light-dark(#060708ad, #ffffffcc);
+  --text-tertiary: light-dark(#06070885, #ffffffa3);
 
   /* Акцент */
   --accent: #007aff;
   --accent-hover: #479fff;
   --accent-pressed: #006ee5;
   --accent-contrast: #ffffff;
-  --accent-soft: #007aff14;
+  --accent-soft: light-dark(#007aff14, #2c2d37);
+  /* Акцент для текста и иконок: в тёмной теме — более светлый оттенок MAX ради контраста */
+  --accent-text: light-dark(#007aff, #479fff);
 
-  --border: #0c0d0e0f;
-  --divider: #0c0d0e29;
-  --danger: #ff303c;
-  --warning-bg: #fff6d6;
-  --warning-text: #6b5300;
+  --border: light-dark(#0c0d0e0f, #e7e7e70f);
+  --divider: light-dark(#0c0d0e29, #ffffff1f);
+  --danger: light-dark(#ff303c, #ff6a73);
+  --danger-soft: light-dark(#ff303c14, #ce425729);
+  --warning-bg: light-dark(#fff6d6, #3a3214);
+  --warning-text: light-dark(#6b5300, #ffd666);
 
   /* Пузыри */
-  --bubble-in: #f2f2f2;
-  --bubble-in-text: #060708;
-  --bubble-in-meta: #06070885;
-  --bubble-out: linear-gradient(135deg, #17a8e5 0%, #0b8ce8 50%, #0070eb 100%);
+  --bubble-in: light-dark(#f2f2f2, #202022);
+  --bubble-in-text: light-dark(#060708, #ffffff);
+  --bubble-in-meta: light-dark(#06070885, #ffffffa3);
+  /* В тёмной теме градиент развёрнут: время и статус (справа внизу) — на самой тёмной точке */
+  --bubble-out-1: light-dark(#17a8e5, #0088cc);
+  --bubble-out-2: light-dark(#0b8ce8, #2251e5);
+  --bubble-out-3: light-dark(#0070eb, #4429cc);
+  --bubble-out: linear-gradient(
+    135deg,
+    var(--bubble-out-1) 0%,
+    var(--bubble-out-2) 50%,
+    var(--bubble-out-3) 100%
+  );
   --bubble-out-text: #ffffff;
-  --bubble-out-meta: #ffffffa3;
-  --separator-bg: #f2f2f2e0;
+  --bubble-out-meta: light-dark(#ffffffa3, #ffffffcc);
+  --bubble-out-status: #ffffffe0;
+  --separator-bg: light-dark(#f2f2f2e0, #202022a3);
 
   /* Радиусы */
   --radius-bubble: 16px;
@@ -43,9 +60,17 @@
   --radius-control: 12px;
   --radius-cell: 16px;
 
-  --shadow-float: 0 4px 16px #00000014;
+  --shadow-float: 0 4px 16px light-dark(#00000014, #0000004d);
   --sidebar-width: 380px;
 
   --font:
     'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }

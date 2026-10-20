@@ -122,7 +122,7 @@
 }
 
 .bubbleOut .status {
-  color: #ffffffe0;
+  color: var(--bubble-out-status);
 }
 
 .bubbleOut .status_failed {

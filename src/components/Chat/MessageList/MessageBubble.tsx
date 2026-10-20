@@ -23,7 +23,12 @@ function StatusIcon({ status }: { status: MessageStatus }) {
     return (
       <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
         <circle cx="8" cy="8" r="7" fill="currentColor" />
-        <path d="M8 4v5M8 11.5v.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
+        <path
+          d="M8 4v5M8 11.5v.5"
+          stroke="var(--accent-contrast)"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
       </svg>
     )
   }

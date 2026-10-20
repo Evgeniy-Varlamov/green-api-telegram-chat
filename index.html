@@ -11,6 +11,15 @@
       rel="stylesheet"
     />
     <title>Чат GREEN-API</title>
+    <script>
+      // Тема до запуска React, чтобы страница не мигала светлой (см. src/utils/theme.ts)
+      try {
+        var theme = localStorage.getItem('greenchat:v1:theme')
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', theme)
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

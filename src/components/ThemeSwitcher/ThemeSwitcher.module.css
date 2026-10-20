@@ -1,0 +1,65 @@
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupLabel {
+  padding: 6px 12px 4px;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.item:hover,
+.item:focus-visible {
+  background: var(--hover);
+  outline: none;
+}
+
+.item svg:first-child {
+  color: var(--text-secondary);
+}
+
+.itemLabel {
+  flex: 1;
+}
+
+.check {
+  color: var(--accent-text);
+}
+
+.toggle {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bg-sidebar);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-float);
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: var(--text);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

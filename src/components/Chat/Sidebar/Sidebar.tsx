@@ -4,6 +4,7 @@ import { useSession } from '../../../hooks/useSession'
 import { useAppDispatch, useAppState } from '../../../store/hooks'
 import { selectChatList } from '../../../store/selectors'
 import { PopupCreateContact } from '../../PopupCreateContact/PopupCreateContact'
+import { ThemeMenuItems } from '../../ThemeSwitcher/ThemeSwitcher'
 import { ContactItem } from './ContactItem'
 import styles from './Sidebar.module.css'
 
@@ -52,6 +53,8 @@ function SidebarMenu() {
       </button>
       {open && (
         <div className={styles.dropdown} role="menu">
+          <ThemeMenuItems />
+          <div className={styles.separator} role="separator" />
           <button type="button" role="menuitem" onClick={() => logout()}>
             Выйти
           </button>

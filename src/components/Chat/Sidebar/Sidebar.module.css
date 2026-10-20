@@ -62,6 +62,7 @@
   border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
+  min-width: 240px;
 }
 
 .dropdown button {
@@ -78,6 +79,12 @@
 .dropdown button:focus-visible {
   background: var(--hover);
   outline: none;
+}
+
+.separator {
+  height: 1px;
+  margin: 6px 4px;
+  background: var(--divider);
 }
 
 .dropdown .danger {
@@ -225,7 +232,7 @@
   border: 0;
   border-radius: var(--radius-control);
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 500;
   cursor: pointer;
 }
